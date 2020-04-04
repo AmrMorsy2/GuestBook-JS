@@ -27,19 +27,17 @@ router.post('/login', async (req, res) => {
         })
         if(req.body.password === result[0].password){
             const payload = req.body
-            await jwt.sign(payload, config.get('jwtKey'), {
-                expiresIn: "1d"
+            jwt.sign(payload, config.get('jwtKey'), {
+                expiresIn: "1m"
             }, (err, authtoken) => {
                 if(err){
                     console.log(err)
                     res.status(500).send("Token issue")
-                }else{
-                    console.log(authtoken)
-                    res.status(200).json({authtoken})
                 }
+                res.status(200).json({"authtoken": authtoken}).send("Token done")
             })
         }else{
-            res.status(200).send("User not found")
+            res.status(300).send("User not found")
         }
     }catch(err){
         console.log(err)
