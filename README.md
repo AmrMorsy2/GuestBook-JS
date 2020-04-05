@@ -1,5 +1,7 @@
 # GuestBook-JS
 
+An in progress NodeJS project
+
 ## DEPENDENCIES 
   - JavaScript
   - NodeJs
