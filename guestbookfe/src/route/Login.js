@@ -1,17 +1,16 @@
 import React, { useState } from "react";
 import { Input, Button } from 'antd';
 import Register from "./Register";
-
+import {Redirect} from 'react-router-dom';
 
 const axios = require('axios').default;
-//const [isAuthenticated, userHasAuthenticated] = useState(false);
+
 
 export default class Login extends React.Component {
      state = {
         username: '',
         password: '',
         email: '',
-        sessionId: '',
     }
 
     onchange = (e) => {
@@ -29,7 +28,8 @@ export default class Login extends React.Component {
             console.log(res);
             if(res.data.authtoken){
                window.localStorage.setItem('cachauthtoken', res.data.authtoken)
-                console.log(window.localStorage.getItem('cachauthtoken'))
+                console.log(res.data)
+                this.props.history.push('/profilemsg?uname='+this.state.username);
             }
         }).catch(function(err){
             console.log(err);

@@ -34,7 +34,7 @@ router.post('/login', async (req, res) => {
                     console.log(err)
                     res.status(500).send("Token issue")
                 }
-                res.status(200).json({"authtoken": authtoken}).send("Token done")
+                res.status(200).json({"authtoken": authtoken, "userid": result[0]._id}).send("Token done")
             })
         }else{
             res.status(300).send("User not found")
@@ -44,5 +44,6 @@ router.post('/login', async (req, res) => {
         throw err
     } 
 })
+
 
 module.exports = router
