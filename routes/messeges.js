@@ -8,13 +8,25 @@ router.get("/:", (req, res) => {
 })
 
 
-router.post("/:id", async (req, res) => {
+router.delete("/del/:username/:msgid", async (req, res) => {
+    console.log(req.body)
+    try{
+        await msgDB.remove({
+            username: req.params.username,
+            _id: req.params.msgid
+        })
+        res.status(200).send("Delete Done")
+    }catch{
+        res.send(402).send("DB delete error")
+    }
+})
+
+router.post("/ins/:username", async (req, res) => {
     console.log(req.body)
     let msgObj = {
-        id: req.params.id,
-        data: req.body.msg
+        username: req.params.username,
+        data: req.body.data
     }
-    
     let ret = new msgDB(msgObj).save().then(()=>{
         console.log("DB insert sucessfully")
         res.status(200).send("Insert done")

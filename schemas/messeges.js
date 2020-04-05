@@ -2,8 +2,8 @@ const mongoose = require('mongoose')
 const msgSchema = mongoose.Schema
 
 const message = new msgSchema({
-    id: {
-        type: Number,
+    username: {
+        type: String,
         required: true
     },
     data: {
